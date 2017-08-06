@@ -4,7 +4,7 @@ import scala.collection.mutable.ArrayBuffer
   * Created by along on 17/8/6 18:30.
   * Email:466210864@qq.com
   */
-object MultType {
+object ArrayDemo {
 
   def main(args: Array[String]): Unit = {
 //    invariableArray
@@ -15,6 +15,7 @@ object MultType {
 //    changeArray
     methodsArray
   }
+
   def methodsArray: Unit ={
     val arr = Array(1,3,4,9)
     println("sum:"+arr.sum)
