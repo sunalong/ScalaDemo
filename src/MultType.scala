@@ -10,9 +10,19 @@ object MultType {
 //    invariableArray
     val ab = ArrayBuffer[Int]()
     //+=向尾部追加元素
-    variableArray(ab)
+//    variableArray(ab)
+    tarversalArray
   }
 
+  private def tarversalArray: Unit ={
+    var arr = Array(1,3,5,7)
+    //增强for循环打印数组
+    for(i<-arr)
+      println(i)
+    //使用until生成一个Range,可带有下标
+    for(i<-(0 until arr.length).reverse)
+      println("arr("+i+")="+arr(i))
+  }
   private def variableArray(ab: ArrayBuffer[Int]) = {
     ab += 2
     //追加多个元素
