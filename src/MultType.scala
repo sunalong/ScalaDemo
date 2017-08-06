@@ -12,7 +12,14 @@ object MultType {
     //+=向尾部追加元素
 //    variableArray(ab)
 //    tarversalArray
-    changeArray
+//    changeArray
+    methodsArray
+  }
+  def methodsArray: Unit ={
+    val arr = Array(1,3,4,9)
+    println("sum:"+arr.sum)
+    println("max:"+arr.max)
+    println("sorted:"+arr.sorted.toBuffer)
   }
   def changeArray: Unit ={
     val arr = Array(1,3,4,9)
