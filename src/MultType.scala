@@ -7,9 +7,27 @@ import scala.collection.mutable.ArrayBuffer
 object MultType {
 
   def main(args: Array[String]): Unit = {
-    invariableArray
+//    invariableArray
+    val ab = ArrayBuffer[Int]()
+    //+=向尾部追加元素
+    variableArray(ab)
   }
 
+  private def variableArray(ab: ArrayBuffer[Int]) = {
+    ab += 2
+    //追加多个元素
+    ab += (3, 4, 5)
+    //++=追加一个数组
+    ab ++= Array(77, 88)
+    //++=追加一个数组缓冲
+    ab ++= ArrayBuffer(66, 99)
+    //在数组某个位置插入元素用insert
+    ab.insert(3, 222, 333, 444)
+    println(ab)
+    //删除数组某个位置的元素用remove
+    ab.remove(4, 3)
+    println(ab)
+  }
 
   /**
     * 定长数组
