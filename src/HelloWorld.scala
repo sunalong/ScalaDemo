@@ -7,6 +7,30 @@ object HelloWorld {
   def main(args: Array[String]): Unit = {
     println("Hello 2World")
     variable
+    condition
+  }
+
+  private def condition = {
+    val x = 1
+    val y = if (x > 0) 1 else -1
+    println("y=" + y)
+
+    //支持混合类型表达式
+    val z = if (x > 1) 1 else "error"
+    println("z=" + z)
+
+    //如果缺失else相当于if(x>2)1 else ()
+    val m = if (x > 2) 1
+    println("m=" + m)
+
+    //在scala中每个表达式都有值，scala中有个Unit类，写做（），相当于java中的void
+    val n = if (x > 2) 1 else ()
+    println("n=" + n)
+
+    //if 和else if
+    val k = if (x < 0) 0
+    else if (x >= 1) 1 else -1
+    println("k=" + k)
   }
 
   def variable = {
