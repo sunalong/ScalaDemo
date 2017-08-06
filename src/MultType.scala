@@ -11,7 +11,23 @@ object MultType {
     val ab = ArrayBuffer[Int]()
     //+=向尾部追加元素
 //    variableArray(ab)
-    tarversalArray
+//    tarversalArray
+    changeArray
+  }
+  def changeArray: Unit ={
+    val arr = Array(1,3,4,9)
+    val ret1=for(e<-arr) yield e*2
+    println("ret1="+ret1.toBuffer)
+    val ret = arr.map(_*3)
+    println("ret="+ret.toBuffer)
+
+    //将奇数取出来乘以10后再生成一新的数组
+    val res = for(e<-arr if e%2!=0) yield e*10
+    println("res:"+res.toBuffer)
+    //filter是过滤，接收一个返回值为boolean的函数
+    //map相当于将数组中的每一个元素取出来，应用传进去的函数
+    val r = arr.filter(_%2!=0).map(_*10)
+    println("r="+r.toBuffer)
   }
 
   private def tarversalArray: Unit ={
