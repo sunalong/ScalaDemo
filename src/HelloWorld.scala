@@ -16,6 +16,12 @@ object HelloWorld {
     val r2 = m1(f2)
     println("r2=" + r2)
 
+    val ret = mReterVoid("fuck")
+    println("ret:" + ret)
+  }
+
+  private def mReterVoid(name: String): Unit = {
+    println("mReterVoid:" + name)
   }
 
   private def m1(f: (Int, Int) => Int): Int = {
