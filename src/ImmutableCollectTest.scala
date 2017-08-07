@@ -7,8 +7,8 @@ import scala.collection.mutable
   */
 object ImmutableCollectTest {
   def main(args: Array[String]): Unit = {
-//    listTest
-    setTest
+    listTest
+//    setTest
   }
 
   private def setTest = {
@@ -42,5 +42,11 @@ object ImmutableCollectTest {
     //将list0插入到list1前生成一个新的集合
     val list9 = list1.:::(list0)
     println(list9)
+    val it = list9.grouped(4)
+    val toList = it.toList
+    println("toList:"+toList)
+    val flat = toList.flatten
+    println("flat:"+flat)
+    println(it.toList.flatten)
   }
 }
