@@ -7,8 +7,21 @@ import scala.collection.mutable.ListBuffer
   */
 object MutableCollectTest {
   def main(args: Array[String]): Unit = {
-    listBufferTest
+//    listBufferTest
     setTest
+    mapTest
+  }
+
+  private def mapTest = {
+    val map1 = new mutable.HashMap[String, Int]()
+    //向map中添加数据
+    map1("spark") = 2
+    map1 += (("hadoop", 3))
+    map1.put("storm", 5)
+    //从map中移除元素
+    map1 -= "spark"
+    map1.remove("hadoop")
+    println(map1)
   }
 
   private def setTest = {
