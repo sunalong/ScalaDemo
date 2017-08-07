@@ -1,5 +1,6 @@
+package com.itcode.first
+
 import scala.collection.immutable.HashSet
-import scala.collection.mutable
 
 /**
   * Created by along on 17/8/7 10:29.

@@ -1,3 +1,5 @@
+package com.itcode.first
+
 import scala.collection.mutable.Map
 /**
   * Created by along on 17/8/6 20:41.
