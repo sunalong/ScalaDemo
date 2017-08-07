@@ -1,3 +1,4 @@
+import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
 /**
@@ -7,6 +8,22 @@ import scala.collection.mutable.ListBuffer
 object MutableCollectTest {
   def main(args: Array[String]): Unit = {
     listBufferTest
+    setTest
+  }
+
+  private def setTest = {
+    //创建一个可变的HashSet
+    val set1 = new mutable.HashSet[Int]()
+    //向HashSet中添加元素
+    set1 += 2
+    //add等价于+=
+    set1.add(4)
+    set1 ++= Set(1, 3, 5)
+    //删除一个元素
+    set1 -= 5
+    set1.remove(3)
+    println(set1.getClass)
+    println(set1)
   }
 
   private def listBufferTest = {
