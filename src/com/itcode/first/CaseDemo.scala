@@ -11,6 +11,20 @@ object CaseDemo {
     //    strMatch
 //    typeMatch
 //    arrayMatch
+    listMatch
+  }
+
+  /**
+    * list匹配
+    */
+  private def listMatch = {
+    val list = List(0,1,2)
+    list match {
+      case 0 :: Nil => println("only 0")
+      case x :: y :: Nil => println(s"x:$x y:$y")
+      case 0 :: tail => println("0...")
+      case _ => println("something else")
+    }
   }
 
   /**
