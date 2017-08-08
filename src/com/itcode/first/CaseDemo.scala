@@ -11,7 +11,17 @@ object CaseDemo {
     //    strMatch
 //    typeMatch
 //    arrayMatch
-    listMatch
+//    listMatch
+    tupleMatch
+  }
+
+  private def tupleMatch = {
+    val tup = (3, 7, 0)
+    tup match {
+      case (1, x, y) => println(s"1,$x, $y")
+      case (_, z, 9) => println(z)
+      case _ => println("else")
+    }
   }
 
   /**
