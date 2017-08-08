@@ -8,8 +8,22 @@ import scala.util.Random
   */
 object CaseDemo {
   def main(args: Array[String]): Unit = {
-//    strMatch
-    typeMatch
+    //    strMatch
+//    typeMatch
+//    arrayMatch
+  }
+
+  /**
+    * 数组匹配
+    */
+  private def arrayMatch = {
+    val arr = Array(0, 3, 5,7)
+    arr match {
+      case Array(1, x, y) => println(x + " " + y)
+      case Array(0) => println("only 0")
+      case Array(0, _*) => println("0...")
+      case _ => println("something else")
+    }
   }
 
   /**
