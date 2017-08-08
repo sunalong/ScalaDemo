@@ -8,16 +8,23 @@ import scala.actors.Actor
   */
 object ActorDemo {
   def main(args: Array[String]): Unit = {
-//    actorTest
-    actorReceiveTest
+    //    actorTest
+//    val actor = new MyActor3
+//    actorMessageTest(actor)
+    val actor4 = new MyActor4
+    actorMessageTest(actor4)
+
   }
 
-  private def actorReceiveTest = {
-    val actor = new MyActor3
+  private def actorMessageTest(actor: Actor) = {
     actor.start()
     actor ! "start"
     actor ! "stop"
     println("消息发送完成！")
+  }
+
+  private def actorReceiveTest = {
+
   }
 
   private def actorTest = {
@@ -25,6 +32,25 @@ object ActorDemo {
     MyActor2.start()
   }
 }
+
+class MyActor4 extends Actor {
+  override def act(): Unit = {
+    loop {
+      react {
+        case "start" =>
+          println("starting...")
+          Thread.sleep(1000)
+          println("started")
+
+        case "stop" =>
+          println("stopping...")
+          Thread.sleep(1000)
+          println("stopped")
+      }
+    }
+  }
+}
+
 
 class MyActor3 extends Actor {
   override def act(): Unit = {
