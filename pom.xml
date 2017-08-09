@@ -38,8 +38,8 @@
     </dependencies>
 
     <build>
-        <sourceDirectory>src</sourceDirectory>
-        <testSourceDirectory>src</testSourceDirectory>
+        <sourceDirectory>src/com/itcode/rpc</sourceDirectory>
+        <testSourceDirectory>src/com/itcode/rpc</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
@@ -88,7 +88,7 @@
                                     <resource>reference.conf</resource>
                                 </transformer>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>cn.itcode.rpc.Worker</mainClass>
+                                    <mainClass>com.itcode.rpc.Worker</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
