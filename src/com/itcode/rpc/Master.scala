@@ -42,7 +42,7 @@ class Master(masterHost: String, masterPort: Int) extends Actor {
     case CheckTimeOutWorker =>
       val currentTime = System.currentTimeMillis()
       val deadWokerSet = workerInfoList.filter(x => currentTime - x.lastHeartBeatTime > CHECK_INTERVAL)
-      println("workerInfoList.length:" + workerInfoList.length + "  deadWorkerSet.size:\"+deadWokerSet.size")
+      println("workerInfoList.length:" + workerInfoList.length + "  deadWorkerSet.size:"+deadWokerSet.size)
       for (deadWoker <- deadWokerSet) {
         workerInfoList -= deadWoker
         println(s"----remove deadWorker:$deadWoker")
