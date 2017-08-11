@@ -9,3 +9,9 @@ trait RemoteMessage extends Serializable
 case class RegisterWorker(id:String,deviceInfo:String) extends RemoteMessage
 
 case class RegistedStatus(masterUrl:String,isSuccess:Boolean)extends RemoteMessage
+
+case object SendHeartBeat
+
+case class HeartBeat(id:String) extends RemoteMessage
+//case class HeartBeat(id:String,currentTime:Long) extends RemoteMessage
+case object CheckTimeOutWorker

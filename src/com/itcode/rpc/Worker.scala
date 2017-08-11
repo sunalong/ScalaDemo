@@ -4,7 +4,7 @@ import java.util.UUID
 
 import akka.actor.{Actor, ActorSelection, ActorSystem, Props}
 import com.typesafe.config.ConfigFactory
-
+import scala.concurrent.duration._
 /**
   * Created by along on 17/8/9 12:19.
   * Email:466210864@qq.com
@@ -13,7 +13,7 @@ class Worker(val masterHost: String, val masterPort: Int) extends Actor {
   var master: ActorSelection = _
   val workerId = UUID.randomUUID().toString
   var deviceInfo = "Mac 10.11.6 EI Capitan " + System.currentTimeMillis()
-
+  val HEAR_BEAT_INTERVAL = 10000
   override def preStart(): Unit = {
     println("Worker preStart")
     master = context.actorSelection(s"akka.tcp://${Master.actorName}@$masterHost:$masterPort/user/MyMaster")
@@ -21,8 +21,14 @@ class Worker(val masterHost: String, val masterPort: Int) extends Actor {
   }
 
   override def receive: Receive = {
+    //接收到注册成功的消息后给自己发送心跳
     case RegistedStatus(masterUrl, isSuccess) =>
       println(s"RegistedStatus:$isSuccess,$masterUrl")
+      import context.dispatcher
+      context.system.scheduler.schedule(0 millis,HEAR_BEAT_INTERVAL millis,self,SendHeartBeat)
+    case SendHeartBeat=>
+      println("receive self heartBeat")
+      master ! HeartBeat(workerId)
   }
 }
 

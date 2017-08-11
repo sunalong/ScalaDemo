@@ -4,6 +4,8 @@ import akka.actor.{Actor, ActorSystem, Props}
 import com.typesafe.config.ConfigFactory
 
 import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
+import scala.concurrent.duration._
 
 /**
   * Created by along on 17/8/9 12:00.
@@ -11,26 +13,40 @@ import scala.collection.mutable
   */
 class Master(masterHost: String, masterPort: Int) extends Actor {
   println("Maseter constructor invoked")
-  var workerIdSet = new mutable.HashSet[String]()
-  var workerMap = new mutable.HashMap[String, WorkerInfo]()
+  val workerInfoList = new ListBuffer[WorkerInfo]
+  val CHECK_INTERVAL = 15000
 
   override def preStart(): Unit = {
     println("master prestart invoked")
-
+    import context.dispatcher
+    context.system.scheduler.schedule(0 millis, CHECK_INTERVAL millis, self, CheckTimeOutWorker)
   }
 
   //用于接收消息
   override def receive: Receive = {
     case RegisterWorker(id, deviceInfo) => {
       println(s"client($id) come to register,deviceInfo:$deviceInfo")
-      if (workerIdSet.contains(id)) {
+      if (workerInfoList.filter(_.id == id).size > 0) {
         println(s"client($id) have already registed before")
       } else {
-        workerMap.put(id, new WorkerInfo(id, deviceInfo))
-        workerIdSet += id
+        workerInfoList.append(new WorkerInfo(id, deviceInfo))
         sender ! RegistedStatus(s"akka.tcp://${Master.actorName}@$masterHost:$masterPort/user/MyMaster", true)
       }
     }
+    case HeartBeat(id) =>
+      println(s"receive client($id) heartBeat")
+      if (workerInfoList.filter(_.id == id).size > 0) {
+        val workerInfo = workerInfoList.filter(x => x.id == id).head
+        workerInfo.lastHeartBeatTime = System.currentTimeMillis()
+      }
+    case CheckTimeOutWorker =>
+      val currentTime = System.currentTimeMillis()
+      val deadWokerSet = workerInfoList.filter(x => currentTime - x.lastHeartBeatTime > CHECK_INTERVAL)
+      println("workerInfoList.length:" + workerInfoList.length + "  deadWorkerSet.size:\"+deadWokerSet.size")
+      for (deadWoker <- deadWokerSet) {
+        workerInfoList -= deadWoker
+        println(s"----remove deadWorker:$deadWoker")
+      }
     case "selfTest" => {
       println("master : receive selfTest")
     }
