@@ -38,8 +38,8 @@
     </dependencies>
 
     <build>
-        <sourceDirectory>src/com/itcode/rpc</sourceDirectory>
-        <testSourceDirectory>src/com/itcode/rpc</testSourceDirectory>
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>src</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>net.alchim31.maven</groupId>

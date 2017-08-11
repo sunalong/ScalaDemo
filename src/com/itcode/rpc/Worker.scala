@@ -1,5 +1,7 @@
 package com.itcode.rpc
 
+import java.util.UUID
+
 import akka.actor.{Actor, ActorSelection, ActorSystem, Props}
 import com.typesafe.config.ConfigFactory
 
@@ -9,16 +11,18 @@ import com.typesafe.config.ConfigFactory
   */
 class Worker(val masterHost: String, val masterPort: Int) extends Actor {
   var master: ActorSelection = _
+  val workerId = UUID.randomUUID().toString
+  var deviceInfo = "Mac 10.11.6 EI Capitan " + System.currentTimeMillis()
 
   override def preStart(): Unit = {
     println("Worker preStart")
     master = context.actorSelection(s"akka.tcp://${Master.actorName}@$masterHost:$masterPort/user/MyMaster")
-    master ! "connect"
+    master ! RegisterWorker(workerId, deviceInfo)
   }
 
   override def receive: Receive = {
-    case "master's reply" =>
-      println("worker: a reply from master")
+    case RegistedStatus(masterUrl, isSuccess) =>
+      println(s"RegistedStatus:$isSuccess,$masterUrl")
   }
 }
 
@@ -43,3 +47,5 @@ object Worker {
     actorSystem.awaitTermination()
   }
 }
+
+//case class RegisterWorker(id:String)
