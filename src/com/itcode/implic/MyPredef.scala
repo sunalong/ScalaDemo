@@ -14,9 +14,17 @@ object MyPredef {
       g.faceValue - that.faceValue
     }
   }
-  implicit val girlOrding = new Ordering[Girl] {
+  implicit val RDDgirlOrding = new Ordering[Girl] {
     override def compare(x: Girl, y: Girl): Int = {
       x.faceValue - y.faceValue
     }
   }
+
+  //同上
+  trait girlOrding2 extends Ordering[Girl]{
+    override def compare(x: Girl, y: Girl): Int = {
+      x.faceValue - y.faceValue
+    }
+  }
+  implicit object Girl extends girlOrding2
 }
