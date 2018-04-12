@@ -6,7 +6,9 @@ object MethodsTest {
     val a=3
     val b=4
     Array().toBuffer
-    println("a+b=",a+b)//结果为：(a+b=,7) 为何如此？
+    println("a+b=",a+b)//结果为：(a+b=,7)
+    println("a+b="+a+b)//结果为：a+b=34
+    println("a+b="+(a+b))//结果为：a+b=7
   }
 
 }
