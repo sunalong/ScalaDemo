@@ -2,6 +2,8 @@ package com.itcode.thread
 
 import java.util.concurrent.{Callable, Executors, Future}
 
+import scala.util.Random
+
 object ThreadDemo {
   def main(args: Array[String]): Unit = {
     //    myThreadPool
@@ -16,7 +18,7 @@ object ThreadDemo {
     val future: Future[String] = threadPool.submit(new Callable[String] {
       override def call() = {
         println(Thread.currentThread().getName + " 执行任务并返回数据")
-        Thread.sleep(1000 * 2)
+        Thread.sleep(Random.nextInt(2000))
         Thread.currentThread().getName + " 执行任务后返回的数据"
       }
     })
