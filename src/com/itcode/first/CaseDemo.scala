@@ -9,10 +9,11 @@ import scala.util.Random
 object CaseDemo {
   def main(args: Array[String]): Unit = {
     //    strMatch
-//    typeMatch
-//    arrayMatch
-//    listMatch
-    tupleMatch
+    //    typeMatch
+    //    arrayMatch
+    //    listMatch
+    //    tupleMatch
+    listMultiMatch
   }
 
   private def tupleMatch = {
@@ -28,7 +29,7 @@ object CaseDemo {
     * list匹配
     */
   private def listMatch = {
-    val list = List(0,1,2)
+    val list = List(0, 1, 2)
     list match {
       case 0 :: Nil => println("only 0")
       case x :: y :: Nil => println(s"x:$x y:$y")
@@ -37,11 +38,26 @@ object CaseDemo {
     }
   }
 
+  private def listMultiMatch = {
+    val list = List(2, 3, "seven")
+    //    val list = List(2,3,7)
+    for (i <- 0 to list.size - 1)
+      list(i) match {
+        case i: Int => {
+          var caclc = i + 1
+          println("i=" + i + "  caclc=" + caclc)
+        }
+        case i: String => {
+          println("i是String:" + i)
+        }
+      }
+  }
+
   /**
     * 数组匹配
     */
   private def arrayMatch = {
-    val arr = Array(0, 3, 5,7)
+    val arr = Array(0, 3, 5, 7)
     arr match {
       case Array(1, x, y) => println(x + " " + y)
       case Array(0) => println("only 0")
